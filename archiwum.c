@@ -53,10 +53,54 @@ void archiwum_wyswietl(const Archiwum *a){
 }
 bool archiwum_edytuj(Archiwum *a, int indeks){
     if (!a || indeks < 0 || indeks >= a->rozmiar){
-        printf("Nieprawidlowy indeks raportu.\n");
         return false;
     }
     raport_edytuj(&a->raporty[indeks]);
     return true;
     
+}
+bool archiwum_usun(Archiwum *a, int indeks){
+    if (!a || indeks < 0 || indeks >= a->rozmiar)
+        return false;
+
+    Raport *r = &a->raporty[indeks];
+
+    if (!raport_mozna_usunac(r)) {
+        return false;
+    }
+
+    for (int i = indeks; i < a->rozmiar - 1; i++) {
+        a->raporty[i] = a->raporty[i + 1];
+    }
+
+    a->rozmiar--;
+    return true;
+    
+}
+void archiwum_szukaj_nazwa(const Archiwum *a, const char *prefiks){
+    int znalezione = 0;
+    size_t len = strlen(prefiks);
+
+    for (int i = 0; i < a->rozmiar; i++){
+        if (strncmp(a->raporty[i].nazwa, prefiks, len) == 0){
+            raport_wyswietl(&a->raporty[i]);
+            znalezione++;
+        }
+    }
+    if (znalezione == 0){
+        printf("Brak raportow spelniajacych kryterium wyszukiwania.\n");
+    }
+}
+void archiwum_szukaj_chaos(const Archiwum *a, int max_chaos){
+    int znalezione = 0;
+
+    for (int i = 0; i < a->rozmiar; i++){
+        if (a->raporty[i].poziom_chaosu <= max_chaos){
+            raport_wyswietl(&a->raporty[i]);
+            znalezione++;
+        }
+    }
+    if (znalezione == 0){
+        printf("Brak raportow spelniajacych kryterium wyszukiwania.\n");
+    }
 }

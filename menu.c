@@ -12,9 +12,18 @@ void menu_glowne(Archiwum *a){
         printf("1. Dodaj nowy raport\n");
         printf("2. Wyswietl archiwum\n");
         printf("3. Edytuj raport\n");
+        printf("4. Usun raport\n");
+        printf("5. Wyszukaj raporty po nazwie\n");
+        printf("6. Wyszukaj raporty po poziomie chaosu\n");
         printf("0. Wyjdz\n");
         printf("Wybierz opcje: ");
-        scanf("%d", &wybor);
+        
+        if (scanf("%d", &wybor) != 1) {
+            while (getchar() != '\n'); // Czyszczenie bufora wejścia
+            printf("Nieprawidlowy wybor. Sprobuj ponownie.\n");
+            continue;
+        }
+
         while (getchar() != '\n'); // Czyszczenie bufora wejścia
 
         switch(wybor){
@@ -28,6 +37,15 @@ void menu_glowne(Archiwum *a){
                 break;
             case 3:
                 menu_edytuj_raport(a);
+                break;
+            case 4:
+                menu_usun_raport(a);
+                break;
+            case 5:
+                menu_szukaj_nazwa(a);
+                break;
+            case 6:
+                menu_szukaj_chaos(a);
                 break;
         }
     } while (wybor != 0);
@@ -78,5 +96,64 @@ void menu_edytuj_raport(Archiwum *a){
     if (!archiwum_edytuj(a, indeks)){
         printf("Nieprawidlowy numer raportu.\n");
     }
+
+}
+
+void menu_usun_raport(Archiwum *a){
+    int indeks;
+    
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do usuniecia.\n");
+        return;
+    }
+    archiwum_wyswietl(a);
+
+    printf("Podaj numer raportu do usuniecia: ");
+    if (scanf("%d",&indeks) != 1){
+        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        printf("Nieprawidlowy numer.\n");
+        return;
+    }
+    while (getchar() != '\n'); // Czyszczenie bufora wejścia
+    indeks--; // Konwersja na indeks 0-based
+
+    if (!archiwum_usun(a, indeks)){
+        printf("Nieprawidlowy numer raportu lub raport nie moze byc usuniety (jest niestabilny).\n");
+    }
+    else {
+        printf("Raport zostal usuniety pomyslnie.\n");
+    }
+
+}
+void menu_szukaj_nazwa(const Archiwum *a){
+    char prefiks[MAX_NAZWA + 1];
+
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do wyszukania.\n");
+        return;
+    }
+    printf("Podaj nazwe lub prefiks do wyszukania: ");
+    wczytaj_linie(prefiks, MAX_NAZWA + 1);
+
+    archiwum_szukaj_nazwa(a, prefiks);
+
+}
+void menu_szukaj_chaos(const Archiwum *a){
+    int max;
+
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do wyszukania.\n");
+        return;
+    }
+
+    printf("Podaj maksymalny poziom chaosu do wyszukania: ");
+    if (scanf("%d",&max) != 1 || max < 0 || max > 10){
+        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        printf("Nieprawidlowy poziom chaosu.\n");
+        return;
+    }
+    while (getchar() != '\n'); // Czyszczenie bufora wejścia
+
+    archiwum_szukaj_chaos(a, max);
 
 }
