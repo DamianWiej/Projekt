@@ -16,4 +16,7 @@ bool archiwum_edytuj(Archiwum *a, int indeks);
 bool archiwum_usun(Archiwum *a, int indeks);
 void archiwum_szukaj_nazwa(const Archiwum *a, const char *prefiks);
 void archiwum_szukaj_chaos(const Archiwum *a, int max_chaos);
+int archiwum_usun_po_nazwie(Archiwum *a, const char *prefiks); //int bo zwraca liczbe usunietych raportow
+Archiwum archiwum_sortuj_po_nazwie(const Archiwum *a);
+Archiwum archiwum_sortuj_po_chaosie(const Archiwum *a);
 #endif // ARCHIWUM_H

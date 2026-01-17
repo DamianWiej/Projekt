@@ -15,6 +15,9 @@ void menu_glowne(Archiwum *a){
         printf("4. Usun raport\n");
         printf("5. Wyszukaj raporty po nazwie\n");
         printf("6. Wyszukaj raporty po poziomie chaosu\n");
+        printf("7. Usun wiele raportow (po nazwie)\n");
+        printf("8. Sortuj raporty alfabetycznie\n");
+        printf("9. Sortuj raporty po poziomie chaosu\n");
         printf("0. Wyjdz\n");
         printf("Wybierz opcje: ");
         
@@ -46,6 +49,15 @@ void menu_glowne(Archiwum *a){
                 break;
             case 6:
                 menu_szukaj_chaos(a);
+                break;
+            case 7:
+                menu_usun_po_nazwie(a);
+                break;
+            case 8:
+                menu_sortuj_nazwa(a);
+                break;
+            case 9:
+                menu_sortuj_chaos(a);
                 break;
         }
     } while (wybor != 0);
@@ -156,4 +168,45 @@ void menu_szukaj_chaos(const Archiwum *a){
 
     archiwum_szukaj_chaos(a, max);
 
+}
+void menu_usun_po_nazwie(Archiwum *a){
+    char prefiks[MAX_NAZWA + 1];
+    int usuniete;
+
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do usuniecia.\n");
+        return;
+    }
+    printf("Podaj nazwe lub prefiks raportow do usuniecia: ");
+    wczytaj_linie(prefiks, MAX_NAZWA + 1);
+
+    usuniete = archiwum_usun_po_nazwie(a, prefiks);
+
+    if (usuniete == 0){
+        printf("Brak raportow spelniajacych kryterium usuniecia.\n");
+    }
+    else {
+        printf("Usunieto %d raport(ow) spelniajacych kryterium.\n", usuniete);
+    }
+    
+}
+void menu_sortuj_nazwa(const Archiwum *a){
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do sortowania.\n");
+        return;
+    }
+
+    Archiwum posortowane = archiwum_sortuj_po_nazwie(a);
+    archiwum_wyswietl(&posortowane);
+    archiwum_zwolnij(&posortowane); 
+}
+void menu_sortuj_chaos(const Archiwum *a){
+    if (a->rozmiar == 0){
+        printf("Archiwum jest puste. Brak raportow do sortowania.\n");
+        return;
+    }
+
+    Archiwum posortowane = archiwum_sortuj_po_chaosie(a);
+    archiwum_wyswietl(&posortowane);
+    archiwum_zwolnij(&posortowane); 
 }

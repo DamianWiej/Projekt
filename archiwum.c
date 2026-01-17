@@ -104,3 +104,71 @@ void archiwum_szukaj_chaos(const Archiwum *a, int max_chaos){
         printf("Brak raportow spelniajacych kryterium wyszukiwania.\n");
     }
 }
+int archiwum_usun_po_nazwie(Archiwum *a, const char *prefiks){
+    int usuniete = 0;
+    size_t len = strlen(prefiks);
+
+    if (!a || len == 0)
+        return 0;
+    
+    // usuwamy od konca, bo jakby bylo od poczatku to rejestry sie przeciez przesuwaja w lewo i indeks sie przesunie
+    for (int i = a->rozmiar - 1; i >= 0; i--){
+        if (strncmp(a->raporty[i].nazwa, prefiks, len) == 0){
+            if (!raport_mozna_usunac(&a->raporty[i]))
+                continue;
+            
+            archiwum_usun(a, i);
+            usuniete++;
+            
+        }
+    }
+    return usuniete;
+}
+static int cmp_nazwa(const void *a, const void *b){
+    const Raport *r1 = a;
+    const Raport *r2 = b;
+    return strcmp(r1->nazwa, r2->nazwa);
+}
+static int cmp_chaos(const void *a, const void *b){
+    const Raport *r1 = a;
+    const Raport *r2 = b;
+    return r1->poziom_chaosu - r2->poziom_chaosu;
+}
+Archiwum archiwum_sortuj_po_nazwie(const Archiwum *a){
+    Archiwum kopia;
+    archiwum_init(&kopia);
+
+    if (!a || a->rozmiar == 0)
+        return kopia;
+    kopia.raporty = malloc(sizeof(Raport) * a->rozmiar);
+    if (!kopia.raporty)
+        return kopia;
+    
+    memcpy(kopia.raporty, a->raporty, sizeof(Raport) * a->rozmiar);
+    kopia.rozmiar = a->rozmiar;
+    kopia.pojemnosc = a->rozmiar;
+
+    qsort(kopia.raporty, kopia.rozmiar, sizeof(Raport), cmp_nazwa);
+
+    return kopia;
+
+}
+Archiwum archiwum_sortuj_po_chaosie(const Archiwum *a){
+    Archiwum kopia;
+    archiwum_init(&kopia);
+
+    if (!a || a->rozmiar == 0)
+        return kopia;
+    kopia.raporty = malloc(sizeof(Raport) * a->rozmiar);
+    if (!kopia.raporty)
+        return kopia;
+    
+    memcpy(kopia.raporty, a->raporty, sizeof(Raport) * a->rozmiar);
+    kopia.rozmiar = a->rozmiar;
+    kopia.pojemnosc = a->rozmiar;
+
+    qsort(kopia.raporty, kopia.rozmiar, sizeof(Raport), cmp_chaos);
+
+    return kopia;
+
+}
