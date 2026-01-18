@@ -1,0 +1,5 @@
+4
+Samonapelniajacy sie kufel piwa|Niemcy7|2|Kufel piwa ktory nigdy sie nie konczy|Stabilny
+Przeklety miecz|Egipt47|7|Miecz po podniesieniu laczy sie z posiadaczem: przemawia do niego i namawia do bojek|Niestabilny
+Butelka suchej wody|Nil23|4|Woda ktora po wypiciu powoduje uczucie suchosci w ustach|Stabilny
+Spaczony budzik|???|10|Budzik ktory co 5 sekund zwieksza glosnosc swojego alarmu o 10dB|Niestabilny

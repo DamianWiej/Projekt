@@ -172,3 +172,79 @@ Archiwum archiwum_sortuj_po_chaosie(const Archiwum *a){
     return kopia;
 
 }
+int archiwum_zapisz_do_pliku(const Archiwum *a, const char *sciezka){
+    FILE *f = fopen(sciezka, "w");
+    if (!f)
+        return -1;
+    
+    if (!a || !sciezka)
+        return 0;
+    
+    fprintf(f, "%d\n", a->rozmiar);
+    for (int i = 0; i < a->rozmiar; i++){
+        Raport *r = &a->raporty[i];
+        fprintf(f, "%s|%s|%d|%s|%s\n", r->nazwa, r->swiat_pochodzenia, r->poziom_chaosu, r->opis_efektu, stabilnosc_na_tekst(r->stabilnosc));
+    }
+
+    fclose(f);
+    return 1;
+}
+int archiwum_wczytaj_z_pliku(Archiwum *a, const char *sciezka){
+    FILE *f = fopen(sciezka,"r");
+    if (!f)
+        return -1;
+
+    Archiwum tmp;
+    int liczba;
+    char bufor[512];
+
+    if (!a || !sciezka)
+        return 0;
+    
+    archiwum_init(&tmp);
+
+    if (fscanf(f, "%d\n", &liczba) != 1 || liczba < 0){
+        fclose(f);
+        return 0;
+    }
+    for (int i = 0; i < liczba; i++){
+        Raport r;
+        if (!fgets(bufor, sizeof(bufor), f)){
+            goto blad;
+        }
+        bufor[strcspn(bufor, "\n")] = '\0'; // Usuwa znak nowej linii
+
+        char *token = strtok(bufor, "|");
+        if (!token) goto blad;
+        strncpy(r.nazwa, token, MAX_NAZWA);
+
+        token = strtok(NULL, "|");
+        if (!token) goto blad;
+        strncpy(r.swiat_pochodzenia, token, MAX_SWIAT);
+
+        token = strtok(NULL, "|");
+        if (!token) goto blad;
+        r.poziom_chaosu = atoi(token);
+
+        token = strtok(NULL, "|");
+        if (!token) goto blad;
+        strncpy(r.opis_efektu, token, MAX_OPIS);
+
+        token = strtok(NULL, "|");
+        if (!token) goto blad;
+        r.stabilnosc = stabilnosc_z_tekstu(token);
+
+        archiwum_dodaj(&tmp, r);
+    }
+    fclose(f);
+    
+    archiwum_zwolnij(a);
+    *a = tmp;
+    return 1;
+
+blad:
+    fclose(f);
+    archiwum_zwolnij(&tmp);
+    return 0;
+    
+}

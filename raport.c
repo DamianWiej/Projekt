@@ -22,6 +22,19 @@ const char *stabilnosc_na_tekst(Stabilnosc s)
     }
 }
 
+Stabilnosc stabilnosc_z_tekstu(const char *tekst)
+{
+    if (!tekst) 
+        return NIEKLASYFIKOWANY;
+    if (strcmp(tekst, "Stabilny") == 0)
+         return STABILNY;
+    if (strcmp(tekst, "Chwiejny") == 0) 
+        return CHWIEJNY;
+    if (strcmp(tekst, "Niestabilny") == 0) 
+        return NIESTABILNY;
+    return NIEKLASYFIKOWANY; 
+}
+
 void raport_wyswietl(const Raport *r)
 {
     if (!r) return;

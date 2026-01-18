@@ -26,6 +26,7 @@ void raport_edytuj(Raport *r);
 bool raport_poprawny(const Raport *r);
 bool raport_mozna_usunac(const Raport *r);
 const char *stabilnosc_na_tekst(Stabilnosc s);
+Stabilnosc stabilnosc_z_tekstu(const char *tekst);
 bool wczytaj_linie(char *bufor, int rozmiar);
 
 #endif // RAPORT_H

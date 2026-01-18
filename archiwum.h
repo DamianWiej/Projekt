@@ -19,4 +19,6 @@ void archiwum_szukaj_chaos(const Archiwum *a, int max_chaos);
 int archiwum_usun_po_nazwie(Archiwum *a, const char *prefiks); //int bo zwraca liczbe usunietych raportow
 Archiwum archiwum_sortuj_po_nazwie(const Archiwum *a);
 Archiwum archiwum_sortuj_po_chaosie(const Archiwum *a);
+int archiwum_zapisz_do_pliku(const Archiwum *a, const char *sciezka);
+int archiwum_wczytaj_z_pliku(Archiwum *a, const char *sciezka);
 #endif // ARCHIWUM_H
