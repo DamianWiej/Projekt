@@ -7,7 +7,7 @@ bool wczytaj_linie(char *bufor, int rozmiar)
     if (fgets(bufor, rozmiar, stdin) == NULL) {
         return false;
     }
-    bufor[strcspn(bufor, "\n")] = '\0'; // Usuwa znak nowej linii
+    bufor[strcspn(bufor, "\n")] = '\0'; 
     return true;
 }
 
@@ -62,11 +62,11 @@ void raport_edytuj(Raport *r){
         printf("Wybierz opcje: ");
 
         if (scanf("%d", &wybor) != 1) {
-            while (getchar() != '\n'); // Czyszczenie bufora wejścia
+            while (getchar() != '\n'); 
             printf("Nieprawidlowy wybor. Sprobuj ponownie.\n");
             continue;
         }
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
 
         switch (wybor){
             case 1:
@@ -80,7 +80,7 @@ void raport_edytuj(Raport *r){
                 if (scanf("%d",&r->poziom_chaosu) != 1 || r->poziom_chaosu < 0 || r->poziom_chaosu > 10) {
                     printf("Nieprawidlowy poziom chaosu. Powinien byc w zakresie 0-10.\n");
                 }
-                while (getchar() != '\n'); // Czyszczenie bufora wejścia
+                while (getchar() != '\n'); 
                 break;
             case 3:
                 printf("Nowy Opis Efektu: ");
@@ -96,7 +96,7 @@ void raport_edytuj(Raport *r){
                 } else {
                     printf("Nieprawidlowy wybor stabilnosci.\n");
                 }
-                while (getchar() != '\n'); // Czyszczenie bufora wejścia
+                while (getchar() != '\n'); 
                 break;
             case 0:
                 printf("Zakonczono edycje raportu.\n");

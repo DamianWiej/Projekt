@@ -1,5 +1,14 @@
-4
+13
 Samonapelniajacy sie kufel piwa|Niemcy7|2|Kufel piwa ktory nigdy sie nie konczy|Stabilny
+Przeklety dyniowy helm|Overworld|8|Przeklety dyniowy helm zaciska sie na szyi noszacego i nie pozwala sie zdjac|Chwiejny
 Przeklety miecz|Egipt47|7|Miecz po podniesieniu laczy sie z posiadaczem: przemawia do niego i namawia do bojek|Niestabilny
+Przeklety krasnal ogrodowy|Zlote ogrody|3|Krasnal ktory po wyrzuceniu z podworka zawsze wraca na swoje miejsce|Nieklasyfikowany
 Butelka suchej wody|Nil23|4|Woda ktora po wypiciu powoduje uczucie suchosci w ustach|Stabilny
-Spaczony budzik|???|10|Budzik ktory co 5 sekund zwieksza glosnosc swojego alarmu o 10dB|Niestabilny
+Spaczony budzik|???|9|Budzik ktory co 5 sekund zwieksza glosnosc swojego alarmu o 10dB|Niestabilny
+Smiercionosny przycisk|Mars|10|Przycisk ktory po wcisnieciu przekazuje wlascicielowi milion dolarow ale zabija losowa osobe na Ziemi|Chwiejny
+Dlugopis mistrza|Ziemia2|1|Dlugopis ktory wykonuje za posiadacza prace domowe|Stabilny
+Zlota kocia lapa|Chiny99|7|Kocia lapa ktora przynosi szczescie posiadaczowi|Nieklasyfikowany
+Lewitujaca klawiatura|Mars|0|Bezprzewodowa klawiatura unoszaca sie w powietrzu|Stabilny
+Spodnie z bezdennymi kieszeniami|Gonun|5|Spodnie ktorych pojemnosc kieszeni jest nieskonczona|Nieklasyfikowany
+Rekawice Midasa|Olimp|8|Rekawice sprawiaja ze wszystko czego dotknie posiadacz zamienia sie w zloto|Stabilny
+Gumowy talerz|Jello82|1|Talerz ktory odbija sie od powierzchni|Stabilny

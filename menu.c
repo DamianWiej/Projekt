@@ -22,12 +22,12 @@ void menu_glowne(Archiwum *a){
         printf("Wybierz opcje: ");
         
         if (scanf("%d", &wybor) != 1) {
-            while (getchar() != '\n'); // Czyszczenie bufora wejścia
+            while (getchar() != '\n'); 
             printf("Nieprawidlowy wybor. Sprobuj ponownie.\n");
             continue;
         }
 
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
 
         switch(wybor){
             case 1: {
@@ -77,7 +77,7 @@ Raport menu_stworz_raport(void){
     do {
         printf("Poziom Chaosu (0-10): ");
         scanf("%d", &r.poziom_chaosu);
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
     } while (r.poziom_chaosu < 0 || r.poziom_chaosu > 10);
     
     printf("Opis Efektu: ");
@@ -85,7 +85,7 @@ Raport menu_stworz_raport(void){
 
     printf("Stabilnosc (0-Stabilny, 1-Chwiejny, 2-Niestabilny, 3-Nieklasyfikowany): ");
     scanf("%d", (int*)&r.stabilnosc);
-    while (getchar() != '\n'); // Czyszczenie bufora wejścia
+    while (getchar() != '\n'); 
     return r;
 }
 void menu_edytuj_raport(Archiwum *a){
@@ -99,12 +99,12 @@ void menu_edytuj_raport(Archiwum *a){
 
     printf("Podaj numer raportu do edycji: ");
     if (scanf("%d",&indeks) != 1){
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
         printf("Nieprawidlowy numer.\n");
         return;
     }
-    while (getchar() != '\n'); // Czyszczenie bufora wejścia
-    indeks--; // Konwersja na indeks 0-based
+    while (getchar() != '\n'); 
+    indeks--; // Konwersja na indeks od 0
     if (!archiwum_edytuj(a, indeks)){
         printf("Nieprawidlowy numer raportu.\n");
     }
@@ -122,12 +122,12 @@ void menu_usun_raport(Archiwum *a){
 
     printf("Podaj numer raportu do usuniecia: ");
     if (scanf("%d",&indeks) != 1){
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
         printf("Nieprawidlowy numer.\n");
         return;
     }
-    while (getchar() != '\n'); // Czyszczenie bufora wejścia
-    indeks--; // Konwersja na indeks 0-based
+    while (getchar() != '\n'); 
+    indeks--; 
 
     if (!archiwum_usun(a, indeks)){
         printf("Nieprawidlowy numer raportu lub raport nie moze byc usuniety (jest niestabilny).\n");
@@ -160,11 +160,11 @@ void menu_szukaj_chaos(const Archiwum *a){
 
     printf("Podaj maksymalny poziom chaosu do wyszukania: ");
     if (scanf("%d",&max) != 1 || max < 0 || max > 10){
-        while (getchar() != '\n'); // Czyszczenie bufora wejścia
+        while (getchar() != '\n'); 
         printf("Nieprawidlowy poziom chaosu.\n");
         return;
     }
-    while (getchar() != '\n'); // Czyszczenie bufora wejścia
+    while (getchar() != '\n'); 
 
     archiwum_szukaj_chaos(a, max);
 
